@@ -1,0 +1,14 @@
+language: go
+
+go:
+  - master
+
+env:
+ global:
+  - GO111MODULE=off
+  
+script:
+  - chmod +x .travis.gofmt.sh
+  - gofmt -d .
+  - go vet -v ./...
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then go test -v ./... ; fi'
